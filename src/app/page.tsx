@@ -287,7 +287,7 @@ export default function Home() {
             </div>
 
             {/* Doctor/Clinic Main Heading */}
-            <h1 className="font-serif text-5xl md:text-6xl xl:text-7xl font-black text-white leading-[1.08] tracking-tight mb-4">
+            <h1 className="font-serif text-4xl xs:text-5xl md:text-6xl xl:text-7xl font-black text-white leading-[1.08] tracking-tight mb-4 animate-fade-in">
               Dr. Ajay N <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-teal via-[#1abfff] to-accent-blue font-serif font-light italic">
                 Orthopaedic
@@ -306,28 +306,28 @@ export default function Home() {
             </p>
 
             {/* Stats Row */}
-            <div ref={statsSectionRef} className="grid grid-cols-3 gap-6 md:gap-10 w-full max-w-lg mb-8 p-5 rounded-2xl bg-[#0b1528]/40 border border-white/5 backdrop-blur-sm">
+            <div ref={statsSectionRef} className="grid grid-cols-3 gap-3 md:gap-10 w-full max-w-lg mb-8 p-4 md:p-5 rounded-2xl bg-[#0b1528]/40 border border-white/5 backdrop-blur-sm">
               <div>
-                <p className="text-3xl md:text-4xl font-serif font-black text-accent-teal">
+                <p className="text-2xl md:text-4xl font-serif font-black text-accent-teal">
                   {stats.years}+
                 </p>
-                <p className="text-[10px] md:text-xs text-white/50 font-bold uppercase tracking-wider mt-1">
+                <p className="text-[9px] md:text-xs text-white/50 font-bold uppercase tracking-wider mt-1">
                   Years Exp
                 </p>
               </div>
               <div>
-                <p className="text-3xl md:text-4xl font-serif font-black text-accent-teal">
+                <p className="text-2xl md:text-4xl font-serif font-black text-accent-teal">
                   {stats.surgeries}+
                 </p>
-                <p className="text-[10px] md:text-xs text-white/50 font-bold uppercase tracking-wider mt-1">
+                <p className="text-[9px] md:text-xs text-white/50 font-bold uppercase tracking-wider mt-1">
                   Surgeries
                 </p>
               </div>
               <div>
-                <p className="text-3xl md:text-4xl font-serif font-black text-accent-teal">
+                <p className="text-2xl md:text-4xl font-serif font-black text-accent-teal">
                   {stats.success}%
                 </p>
-                <p className="text-[10px] md:text-xs text-white/50 font-bold uppercase tracking-wider mt-1">
+                <p className="text-[9px] md:text-xs text-white/50 font-bold uppercase tracking-wider mt-1">
                   Success Rate
                 </p>
               </div>

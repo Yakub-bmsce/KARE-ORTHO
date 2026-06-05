@@ -27,10 +27,10 @@ export function DoctorCard() {
     setRotate({ x: 0, y: 0 });
   };
 
-  const photoUrl = "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE-qnuh5h_srN6ajFOnwKQ01s2cr8Zpp27fuEydnC7v_RZQXQHpAJslBztBFD3jjoM22n1T0av6EzFhYIhPpnxnq_rHSOBbCwHnuvbwcP03Z6Jj8On_2O6KN--5QXOmnQl6FI-zUcECAw=s1360-w1360-h1020-rw";
+  const photoUrl = "/doctor-profile.jpg";
 
   return (
-    <div className="animate-float-card">
+    <div className="animate-float-card w-full flex justify-center">
       <div
         ref={cardRef}
         onMouseMove={handleMouseMove}
@@ -40,7 +40,7 @@ export function DoctorCard() {
           transition: rotate.x === 0 && rotate.y === 0 ? 'all 0.5s cubic-bezier(0.25, 1, 0.5, 1)' : 'none',
           transformStyle: 'preserve-3d',
         }}
-        className="relative w-[320px] h-[440px] rounded-[24px] bg-[#0b1528] border border-white/5 shadow-2xl flex flex-col justify-between p-5 group cursor-pointer transition-shadow hover:shadow-[0_20px_50px_rgba(0,201,167,0.15)]"
+        className="relative w-full max-w-[320px] h-[440px] rounded-[24px] bg-[#0b1528] border border-white/5 shadow-2xl flex flex-col justify-between p-5 group cursor-pointer transition-shadow hover:shadow-[0_20px_50px_rgba(0,201,167,0.15)]"
       >
         {/* Top gradient line */}
         <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#00c9a7] to-[#1a8fff] transition-all duration-300 group-hover:h-[6px]" />
