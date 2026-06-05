@@ -66,6 +66,7 @@ export default function Home() {
   // Form states
   const [formData, setFormData] = useState({
     name: '',
+    email: '',
     phone: '',
     date: '',
     service: 'Knee Pain Treatment',
@@ -153,21 +154,47 @@ export default function Home() {
     });
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setIsModalOpen(false);
-      // Reset form
-      setFormData({
-        name: '',
-        phone: '',
-        date: '',
-        service: 'Knee Pain Treatment',
-        message: ''
+    try {
+      // Send real POST request to our API endpoint
+      const response = await fetch('/api/book', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-    }, 2500);
+
+      const data = await response.json();
+      console.log('Booking API response:', data);
+
+      // Client-side fallback: if environment variables are not configured in Twilio (isMock=true)
+      // open WhatsApp in a new window pre-filled with the user's details.
+      if (data.isMock) {
+        const whatsappMsg = `Hello KARE Orthopaedics,\nI have scheduled an appointment from your website:\n\n👤 Name: ${formData.name}\n📧 Email: ${formData.email}\n📞 Phone: ${formData.phone}\n🗓️ Date: ${formData.date}\n🏥 Department: ${formData.service}\n📝 Notes: ${formData.message || 'None'}`;
+        const encodedMsg = encodeURIComponent(whatsappMsg);
+        window.open(`https://wa.me/918657641152?text=${encodedMsg}`, '_blank');
+      }
+
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setIsModalOpen(false);
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          date: '',
+          service: 'Knee Pain Treatment',
+          message: ''
+        });
+      }, 3000);
+    } catch (error) {
+      console.error('Failed to submit booking appointment:', error);
+      alert('There was a network error sending your booking request. Please call clinic directly at +91 86576 41152.');
+    }
   };
 
   // Nav links helper
@@ -979,8 +1006,20 @@ export default function Home() {
                   />
                 </div>
 
-                {/* Phone & Date */}
+                {/* Email & Phone */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[10px] font-bold text-white/50 uppercase tracking-wider mb-1.5">Email Address</label>
+                    <input 
+                      type="email" 
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="patient@example.com"
+                      className="w-full bg-[#050e1f] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:border-accent-teal focus:outline-none transition-colors"
+                    />
+                  </div>
                   <div>
                     <label className="block text-[10px] font-bold text-white/50 uppercase tracking-wider mb-1.5">Mobile Number</label>
                     <input 
@@ -993,17 +1032,19 @@ export default function Home() {
                       className="w-full bg-[#050e1f] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:border-accent-teal focus:outline-none transition-colors"
                     />
                   </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-white/50 uppercase tracking-wider mb-1.5">Preferred Date</label>
-                    <input 
-                      type="date" 
-                      name="date"
-                      required
-                      value={formData.date}
-                      onChange={handleInputChange}
-                      className="w-full bg-[#050e1f] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-accent-teal focus:outline-none transition-colors"
-                    />
-                  </div>
+                </div>
+
+                {/* Preferred Date */}
+                <div>
+                  <label className="block text-[10px] font-bold text-white/50 uppercase tracking-wider mb-1.5">Preferred Date</label>
+                  <input 
+                    type="date" 
+                    name="date"
+                    required
+                    value={formData.date}
+                    onChange={handleInputChange}
+                    className="w-full bg-[#050e1f] border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:border-accent-teal focus:outline-none transition-colors"
+                  />
                 </div>
 
                 {/* Service type */}
