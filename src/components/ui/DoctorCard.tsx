@@ -27,7 +27,7 @@ export function DoctorCard() {
     setRotate({ x: 0, y: 0 });
   };
 
-  const photoUrl = "/doctor-profile.jpg";
+  const photoUrl = "https://lh3.googleusercontent.com/gps-cs-s/APNQkAE-qnuh5h_srN6ajFOnwKQ01s2cr8Zpp27fuEydnC7v_RZQXQHpAJslBztBFD3jjoM22n1T0av6EzFhYIhPpnxnq_rHSOBbCwHnuvbwcP03Z6Jj8On_2O6KN--5QXOmnQl6FI-zUcECAw=s1360-w1360-h1020-rw";
 
   return (
     <div className="animate-float-card w-full flex justify-center">
@@ -62,8 +62,8 @@ export function DoctorCard() {
             alt="Dr. Ajay N" 
             className="w-full h-full object-cover object-[center_22%]"
             onError={(e) => {
-              // Fallback to local image or generic avatar if url fails
-              (e.target as HTMLImageElement).src = "/dr-ajay-treat.jpg";
+              // Fallback to local cropped portrait if Google URL fails
+              (e.target as HTMLImageElement).src = "/doctor-profile.jpg";
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0b1528] via-transparent to-transparent opacity-80" />
